@@ -4,6 +4,7 @@ Etcd:
   Hosts:
   - 127.0.0.1:2379
   Key: adder.rpc
-  CertFile: /etc/kubernetes/pki/etcd/ca.crt
-  CertKeyFile: /etc/kubernetes/pki/apiserver-etcd-client.crt
-  CACertFile: /etc/kubernetes/pki/apiserver-etcd-client.key
+  CACertFile: /etc/kubernetes/pki/etcd/ca.crt
+  CertFile: /etc/kubernetes/pki/apiserver-etcd-client.crt
+  CertKeyFile: /etc/kubernetes/pki/apiserver-etcd-client.key
+Mode: dev

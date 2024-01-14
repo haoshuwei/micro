@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Adder_Ping_FullMethodName = "/adder.Adder/Ping"
+	Adder_Add_FullMethodName = "/adder.Adder/add"
 )
 
 // AdderClient is the client API for Adder service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AdderClient interface {
-	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	Add(ctx context.Context, in *AddReq, opts ...grpc.CallOption) (*AddResp, error)
 }
 
 type adderClient struct {
@@ -37,9 +37,9 @@ func NewAdderClient(cc grpc.ClientConnInterface) AdderClient {
 	return &adderClient{cc}
 }
 
-func (c *adderClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
-	err := c.cc.Invoke(ctx, Adder_Ping_FullMethodName, in, out, opts...)
+func (c *adderClient) Add(ctx context.Context, in *AddReq, opts ...grpc.CallOption) (*AddResp, error) {
+	out := new(AddResp)
+	err := c.cc.Invoke(ctx, Adder_Add_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ func (c *adderClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOp
 // All implementations must embed UnimplementedAdderServer
 // for forward compatibility
 type AdderServer interface {
-	Ping(context.Context, *Request) (*Response, error)
+	Add(context.Context, *AddReq) (*AddResp, error)
 	mustEmbedUnimplementedAdderServer()
 }
 
@@ -58,8 +58,8 @@ type AdderServer interface {
 type UnimplementedAdderServer struct {
 }
 
-func (UnimplementedAdderServer) Ping(context.Context, *Request) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+func (UnimplementedAdderServer) Add(context.Context, *AddReq) (*AddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Add not implemented")
 }
 func (UnimplementedAdderServer) mustEmbedUnimplementedAdderServer() {}
 
@@ -74,20 +74,20 @@ func RegisterAdderServer(s grpc.ServiceRegistrar, srv AdderServer) {
 	s.RegisterService(&Adder_ServiceDesc, srv)
 }
 
-func _Adder_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request)
+func _Adder_Add_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdderServer).Ping(ctx, in)
+		return srv.(AdderServer).Add(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Adder_Ping_FullMethodName,
+		FullMethod: Adder_Add_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdderServer).Ping(ctx, req.(*Request))
+		return srv.(AdderServer).Add(ctx, req.(*AddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -100,8 +100,8 @@ var Adder_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AdderServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Ping",
-			Handler:    _Adder_Ping_Handler,
+			MethodName: "add",
+			Handler:    _Adder_Add_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -6,7 +6,7 @@ package adderclient
 import (
 	"context"
 
-	"github.com/haoshuwei/micro/adder/protoc/adder"
+	"github.com/haoshuwei/micro/adder/adder"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package miner;
+option go_package="./miner";
+
+message MinerReq {
+  int32 a = 1;
+  int32 b = 2;
+}
+
+message MinerResp {
+  int32 sum = 1;
+}
+
+service Miner {
+  rpc min(MinerReq) returns(MinerResp);
+}

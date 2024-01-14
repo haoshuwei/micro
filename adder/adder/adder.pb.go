@@ -20,16 +20,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type Request struct {
+type AddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ping string `protobuf:"bytes,1,opt,name=ping,proto3" json:"ping,omitempty"`
+	A int32 `protobuf:"varint,1,opt,name=a,proto3" json:"a,omitempty"`
+	B int32 `protobuf:"varint,2,opt,name=b,proto3" json:"b,omitempty"`
 }
 
-func (x *Request) Reset() {
-	*x = Request{}
+func (x *AddReq) Reset() {
+	*x = AddReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_adder_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -37,13 +38,13 @@ func (x *Request) Reset() {
 	}
 }
 
-func (x *Request) String() string {
+func (x *AddReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request) ProtoMessage() {}
+func (*AddReq) ProtoMessage() {}
 
-func (x *Request) ProtoReflect() protoreflect.Message {
+func (x *AddReq) ProtoReflect() protoreflect.Message {
 	mi := &file_adder_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,28 +56,35 @@ func (x *Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Request.ProtoReflect.Descriptor instead.
-func (*Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddReq.ProtoReflect.Descriptor instead.
+func (*AddReq) Descriptor() ([]byte, []int) {
 	return file_adder_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Request) GetPing() string {
+func (x *AddReq) GetA() int32 {
 	if x != nil {
-		return x.Ping
+		return x.A
 	}
-	return ""
+	return 0
 }
 
-type Response struct {
+func (x *AddReq) GetB() int32 {
+	if x != nil {
+		return x.B
+	}
+	return 0
+}
+
+type AddResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Pong string `protobuf:"bytes,1,opt,name=pong,proto3" json:"pong,omitempty"`
+	Sum int32 `protobuf:"varint,1,opt,name=sum,proto3" json:"sum,omitempty"`
 }
 
-func (x *Response) Reset() {
-	*x = Response{}
+func (x *AddResp) Reset() {
+	*x = AddResp{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_adder_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -84,13 +92,13 @@ func (x *Response) Reset() {
 	}
 }
 
-func (x *Response) String() string {
+func (x *AddResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Response) ProtoMessage() {}
+func (*AddResp) ProtoMessage() {}
 
-func (x *Response) ProtoReflect() protoreflect.Message {
+func (x *AddResp) ProtoReflect() protoreflect.Message {
 	mi := &file_adder_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -102,31 +110,31 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Response.ProtoReflect.Descriptor instead.
-func (*Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddResp.ProtoReflect.Descriptor instead.
+func (*AddResp) Descriptor() ([]byte, []int) {
 	return file_adder_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Response) GetPong() string {
+func (x *AddResp) GetSum() int32 {
 	if x != nil {
-		return x.Pong
+		return x.Sum
 	}
-	return ""
+	return 0
 }
 
 var File_adder_proto protoreflect.FileDescriptor
 
 var file_adder_proto_rawDesc = []byte{
 	0x0a, 0x0b, 0x61, 0x64, 0x64, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x61,
-	0x64, 0x64, 0x65, 0x72, 0x22, 0x1d, 0x0a, 0x07, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x12, 0x0a, 0x04, 0x70, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70,
-	0x69, 0x6e, 0x67, 0x22, 0x1e, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x12, 0x0a, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70,
-	0x6f, 0x6e, 0x67, 0x32, 0x30, 0x0a, 0x05, 0x41, 0x64, 0x64, 0x65, 0x72, 0x12, 0x27, 0x0a, 0x04,
-	0x50, 0x69, 0x6e, 0x67, 0x12, 0x0e, 0x2e, 0x61, 0x64, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x0f, 0x2e, 0x61, 0x64, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x61, 0x64, 0x64, 0x65, 0x72,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x64, 0x64, 0x65, 0x72, 0x22, 0x24, 0x0a, 0x06, 0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x12, 0x0c,
+	0x0a, 0x01, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x01, 0x61, 0x12, 0x0c, 0x0a, 0x01,
+	0x62, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x01, 0x62, 0x22, 0x1b, 0x0a, 0x07, 0x41, 0x64,
+	0x64, 0x52, 0x65, 0x73, 0x70, 0x12, 0x10, 0x0a, 0x03, 0x73, 0x75, 0x6d, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x03, 0x73, 0x75, 0x6d, 0x32, 0x2d, 0x0a, 0x05, 0x41, 0x64, 0x64, 0x65, 0x72,
+	0x12, 0x24, 0x0a, 0x03, 0x61, 0x64, 0x64, 0x12, 0x0d, 0x2e, 0x61, 0x64, 0x64, 0x65, 0x72, 0x2e,
+	0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x1a, 0x0e, 0x2e, 0x61, 0x64, 0x64, 0x65, 0x72, 0x2e, 0x41,
+	0x64, 0x64, 0x52, 0x65, 0x73, 0x70, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x61, 0x64, 0x64, 0x65,
+	0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -143,12 +151,12 @@ func file_adder_proto_rawDescGZIP() []byte {
 
 var file_adder_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_adder_proto_goTypes = []interface{}{
-	(*Request)(nil),  // 0: adder.Request
-	(*Response)(nil), // 1: adder.Response
+	(*AddReq)(nil),  // 0: adder.AddReq
+	(*AddResp)(nil), // 1: adder.AddResp
 }
 var file_adder_proto_depIdxs = []int32{
-	0, // 0: adder.Adder.Ping:input_type -> adder.Request
-	1, // 1: adder.Adder.Ping:output_type -> adder.Response
+	0, // 0: adder.Adder.add:input_type -> adder.AddReq
+	1, // 1: adder.Adder.add:output_type -> adder.AddResp
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -163,7 +171,7 @@ func file_adder_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_adder_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Request); i {
+			switch v := v.(*AddReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -175,7 +183,7 @@ func file_adder_proto_init() {
 			}
 		}
 		file_adder_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Response); i {
+			switch v := v.(*AddResp); i {
 			case 0:
 				return &v.state
 			case 1:

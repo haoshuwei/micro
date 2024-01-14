@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
+	"github.com/haoshuwei/micro/adder/adder"
 	"github.com/haoshuwei/micro/adder/internal/logic"
 	"github.com/haoshuwei/micro/adder/internal/svc"
-	"github.com/haoshuwei/micro/adder/protoc/adder"
 )
 
 type AdderServer struct {
